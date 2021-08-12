@@ -1,0 +1,4 @@
+passphrase = myownkey
+
+path : 'cd ../home/'
+

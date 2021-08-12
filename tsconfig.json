@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2017",
+        "outDir": "ts-built",
+        "rootDir": "src",
+	"noImplicitAny": false
+    }
+}

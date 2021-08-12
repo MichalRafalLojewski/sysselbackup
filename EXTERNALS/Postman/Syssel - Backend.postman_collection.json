@@ -1,0 +1,7181 @@
+{
+	"info": {
+		"_postman_id": "27ee53f0-3cfd-4b21-874b-c0648d16fc79",
+		"name": "Syssel backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"first_name\" : \"Bob\",\n\"last_name\": \"Smith\",\n\"email\" : \"igeewdkijx@grr.la\",\n\"password\": \"test1234\",\n\"birthday_timestamp\": 10000,\n\"phone\": \"91741088\",\n    \"address\": {\n        \"street\": \"Somewhere 22\",\n        \"city\": \"Oslo\",\n        \"region\": \"Hordaland\",\n        \"postal_code\": \"5035\",\n        \"country_code\": \"NO\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/both/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"user\": {\n\"first_name\" : \"Bob\",\n\"last_name\": \"Smith\",\n\"email\" : \"igeewdkjxj@grr.la\",\n\"password\": \"test1234\",\n\"birthday_timestamp\": 10000,\n\"phone\": \"91741088\",\n    \"address\": {\n        \"street\": \"Somewhere 22\",\n        \"city\": \"Oslo\",\n        \"region\": \"Hordaland\",\n        \"postal_code\": \"5035\",\n        \"country_code\": \"NO\"\n    }\n},\n\"profile\": {\n   \"title\":\"Test company  ZZ\",\n   \"description\":\"Comapny description\",\n   \"website_url\":\"http://example.com\",\n   \"categories\":[\n      \"5e90667f3560e2389bae6821\"\n   ],\n   \"type\":\"consumer\",\n   \"tags\":[\n      \"tag1\",\n      \"tag2\"\n   ],\n   \"location\":{\n      \"type\":\"Point\",\n      \"coordinates\":[\n         \"-10\",\n         \"10\"\n      ]\n   },\n   \"location_string\":\"Kking harald street, 5012 Oslo\",\n   \"opening_times\":{\n      \"1\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      },\n      \"2\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      }\n   }\n}\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/both/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"both",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"bearer\", \"Bearer \"+pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"email\" : \"igeewdkijx@grr.la\",\n\"password\": \"test1234\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin/user/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"bearer\", \"Bearer \"+pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"email\" : \"igeewkjx@grr.la\",\n\"password\": \"test1234\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/admin/user/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"admin",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/invalidateTokens",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/user/invalidateTokens",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"invalidateTokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"old_password\" : \"test1234\",\n\"new_password\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/changePassword",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"_id\": \"5f3c1cb673ccd0360af4ae1e\",\n\"last_name\": \"Smith\",\n\"first_name\": \"Terry\",\n\"birthday_timestamp\": 90000,\n\"location\":{\n\t\t\"coordinates\": [60.3913, 4.3221],\n\t\t\"type\": \"Point\"\n}    \n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/user/fetch",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"fetch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/user/fetchAny?offset=0&limit=10&sort=-created_at&type=admin",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "type",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/password/reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"email\": \"igeewkjx@grr.la\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/password/reset",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/password/perform_reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"email\": \"email@example.com\",\n  \"reset_code\": \"0MKF00\",\n  \"new_password\": \"1234567\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/password/perform_reset",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"password",
+								"perform_reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/client_tokens/add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"token\": \"token here\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/client_tokens/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"client_tokens",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/client_tokens/delete/:token",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n  \"token\": \"token here 2\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/user/client_tokens/delete/token here",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"client_tokens",
+								"delete",
+								"token here"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/fetch/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/user/fetch/5f3c1cb673ccd0360af4ae1e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"fetch",
+								"5f3c1cb673ccd0360af4ae1e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "campaign",
+			"item": [
+				{
+					"name": "campaign/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\":\"Test menu\",\n   \"listed\":true,\n   \"opening_times\":{\n      \"1\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      },\n      \"2\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/campaign/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/assignItems",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaign_id\": \"5eadeb64fda17b3e3249e5d0\",\n    \"item_ids\": [\"5eac04b4cf37198939a3ce1d\"]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/campaign/assignItems",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"assignItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/removeItems",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaign_id\": \"5eadeb64fda17b3e3249e5d0\",\n    \"item_ids\": [\"5eac04b4cf37198939a3ce1d\"]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/campaign/removeItems",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"removeItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\":\"5fe8d26ef36c1c4f7e1f3926\",\n    \"title\":\"Test menu 100qpy0\",\n    \"listed\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/campaign/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/campaign/fetch/5fe8d26ef36c1c4f7e1f3926?populate[]=items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"fetch",
+								"5fe8d26ef36c1c4f7e1f3926"
+							],
+							"query": [
+								{
+									"key": "populate[]",
+									"value": "items"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/fetchByProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/campaign/fetchByProfile?owner_profile={{profile}}&limit=100&offset=0&sort=-created_at&populate[]=items.other_pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"fetchByProfile"
+							],
+							"query": [
+								{
+									"key": "owner_profile",
+									"value": "{{profile}}"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "items.other_pics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/campaign/fetchAny?limit=10&offset=0&sort=-created_at&search=test&owner_user=!5f3c1cb673ccd0360af4ae1e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "search",
+									"value": "test"
+								},
+								{
+									"key": "owner_user",
+									"value": "!5f3c1cb673ccd0360af4ae1e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "campaign/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/campaign/delete/5fe8d26ef36c1c4f7e1f3926",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"delete",
+								"5fe8d26ef36c1c4f7e1f3926"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/campaign/fromSubscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/campaign/fromSubscriptions?offset=0&limit=10&sort=-created_at&lat=10&long=10&max_distance=1000",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"campaign",
+								"fromSubscriptions"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "lat",
+									"value": "10"
+								},
+								{
+									"key": "long",
+									"value": "10"
+								},
+								{
+									"key": "max_distance",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mission",
+			"item": [
+				{
+					"name": "mission/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\":\"5e90667f3560e2389bae6821\",\n    \"tags\":[\"computer\"],\n    \"title\":\"Test menu\",\n    \"front_pic\": \"5ef721244c0c23aa0b4201cf\",\n    \"location\": {\n    \"type\":\"Point\",\n    \"coordinates\": [20,20]\t\n    },\n    \t\"listed\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/mission/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\":\"5ead75da27a6e50b0832228a\",\n    \"category\":\"5e90667f3560e2389bae6821\",\n    \"title\":\"Test mission\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/mission/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/mission/fetch/5f0e062382d58117d5146806?populate[]=bids&populate[]=category&populate[]=owner_profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"fetch",
+								"5f0e062382d58117d5146806"
+							],
+							"query": [
+								{
+									"key": "populate[]",
+									"value": "bids"
+								},
+								{
+									"key": "populate[]",
+									"value": "category"
+								},
+								{
+									"key": "populate[]",
+									"value": "owner_profile"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission/fetchByProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/mission/fetchByProfile?owner_id={{profile}}&limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"fetchByProfile"
+							],
+							"query": [
+								{
+									"key": "owner_id",
+									"value": "{{profile}}"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/mission/fetchAny?limit=10&offset=0&sort=-created_at&search=mission&populate[]=bids",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "search",
+									"value": "mission"
+								},
+								{
+									"key": "populate[]",
+									"value": "bids"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mission/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/mission/delete/5ef7212b4c0c23aa0b4201d0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"delete",
+								"5ef7212b4c0c23aa0b4201d0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/mission/fromSubscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/mission/fromSubscriptions?offset=0&limit=10&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mission",
+								"fromSubscriptions"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "bid",
+			"item": [
+				{
+					"name": "bid/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 10.3,\n    \"mission\": \"5f0f3fffcabee74b10771509\",\n    \"item_options\": \"5efe09b38f4e8e088ba4a500\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/bid/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Campaign - Example campaign created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjdkMTMwZmM3NWRjM2Y3ZjY4YTJmMyIsImlhdCI6MTU4MDYwMjc3Nn0.gBXXWaVT7Of9L2h1P-yMYG3wodP9P0YCIO3bPDZIlsY"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"IT\",\n    \"type\":\"multi_item\",\n    \"title\":\"Test Campaign 99\",\n    \"shipping_options\":[{\"label\": \"Postage\", \"price\":\"10\", \"option_type\":\"fixed\"}],\n    \"require_accept\":\"0\",\n    \"accepted_payment_options\":[\"vipps\"],\n    \"use_escrow\":0,\n    \"base_currency\":\"nok\"\n}"
+								},
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/create",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"items\":[]}"
+						}
+					]
+				},
+				{
+					"name": "bid/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/fetch/5f0e064b82d58117d5146807?populate[]=item_options&populate[]=owner_profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"fetch",
+								"5f0e064b82d58117d5146807"
+							],
+							"query": [
+								{
+									"key": "populate[]",
+									"value": "item_options"
+								},
+								{
+									"key": "populate[]",
+									"value": "owner_profile"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch given campaign - Example campaign fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/fetch?id=5c084576060f090df7186dc7",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c084576060f090df7186dc7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"owner\":{\"_id\":\"5c083724060f090df7186dc2\",\"name\":\"bob\",\"email\":\"test999@test.com\",\"type\":\"user\",\"suspended\":false,\"active\":false,\"lastLogin\":1544045231,\"updated_at\":\"2018-12-05 21:27:11\",\"created_at\":\"2018-12-05 20:37:56\"},\"items\":[{\"_id\":\"5c084797060f090df7186dca\",\"price\":\"0.5\",\"use_in_stock\":\"1\",\"in_stock\":\"100\",\"description\":\"Test item 909\",\"campaign_id\":\"5c084576060f090df7186dc7\",\"updated_at\":\"2018-12-05 21:48:07\",\"created_at\":\"2018-12-05 21:48:07\"}]}"
+						}
+					]
+				},
+				{
+					"name": "/bid/fetchMultiple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/fetchMultiple?limit=10&offset=0&sort=-created_at&owner_id={{profile}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "owner_id",
+									"value": "{{profile}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch given campaign - Example campaign fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/fetch?id=5c084576060f090df7186dc7",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c084576060f090df7186dc7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"owner\":{\"_id\":\"5c083724060f090df7186dc2\",\"name\":\"bob\",\"email\":\"test999@test.com\",\"type\":\"user\",\"suspended\":false,\"active\":false,\"lastLogin\":1544045231,\"updated_at\":\"2018-12-05 21:27:11\",\"created_at\":\"2018-12-05 20:37:56\"},\"items\":[{\"_id\":\"5c084797060f090df7186dca\",\"price\":\"0.5\",\"use_in_stock\":\"1\",\"in_stock\":\"100\",\"description\":\"Test item 909\",\"campaign_id\":\"5c084576060f090df7186dc7\",\"updated_at\":\"2018-12-05 21:48:07\",\"created_at\":\"2018-12-05 21:48:07\"}]}"
+						}
+					]
+				},
+				{
+					"name": "/bid/fetchByMission",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/fetchByMission/5f0e03b73023b4904f4fed6e?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"fetchByMission",
+								"5f0e03b73023b4904f4fed6e"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch given campaign - Example campaign fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/fetch?id=5c084576060f090df7186dc7",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c084576060f090df7186dc7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"owner\":{\"_id\":\"5c083724060f090df7186dc2\",\"name\":\"bob\",\"email\":\"test999@test.com\",\"type\":\"user\",\"suspended\":false,\"active\":false,\"lastLogin\":1544045231,\"updated_at\":\"2018-12-05 21:27:11\",\"created_at\":\"2018-12-05 20:37:56\"},\"items\":[{\"_id\":\"5c084797060f090df7186dca\",\"price\":\"0.5\",\"use_in_stock\":\"1\",\"in_stock\":\"100\",\"description\":\"Test item 909\",\"campaign_id\":\"5c084576060f090df7186dc7\",\"updated_at\":\"2018-12-05 21:48:07\",\"created_at\":\"2018-12-05 21:48:07\"}]}"
+						}
+					]
+				},
+				{
+					"name": "bid/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/delete/5ead9efc9262401b33e3b1b5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"delete",
+								"5ead9efc9262401b33e3b1b5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete item by id - Example item deleted from campaign",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjdkMTMwZmM3NWRjM2Y3ZjY4YTJmMyIsImlhdCI6MTU4MDYwMjc3Nn0.gBXXWaVT7Of9L2h1P-yMYG3wodP9P0YCIO3bPDZIlsY"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/items/delete?id=5c0846f5060f090df7186dc9",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"items",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c0846f5060f090df7186dc9"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:47:18 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:47:18 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"message\":\"Success\"}"
+						}
+					]
+				},
+				{
+					"name": "/bid/accept/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/accept/5ead78d95730af0eb787a9e1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"accept",
+								"5ead78d95730af0eb787a9e1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/bid/reject/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/bid/reject/5ead78d95730af0eb787a9e1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"bid",
+								"reject",
+								"5ead78d95730af0eb787a9e1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "profileReview",
+			"item": [
+				{
+					"name": "profile/review/fetchFrom",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"limit\": \"10\",\n\t\"offset\": \"0\",\n\t\"sort\":\"-category\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/review/fetchFrom/{{profile}}?limit=10&offset=0&sort=-created_at&populate[]=profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"review",
+								"fetchFrom",
+								"{{profile}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "profile"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/review/create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"profile\": \"{{profile}}\",\n\t\"text\": \"test campaign review 998++++\",\n    \"order\": \"6022dcc671269d8e2690a551\",\n\t\"rating\": 2\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/review/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"review",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/review/fetchTo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"limit\": \"10\",\n\t\"offset\": \"0\",\n\t\"sort\":\"-category\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/review/fetchTo/6018865166da758321e19e2d?limit=10&offset=0&sort=-created_at&populate[]=profile&populate[]=order&populate[]=owner_profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"review",
+								"fetchTo",
+								"6018865166da758321e19e2d"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "profile"
+								},
+								{
+									"key": "populate[]",
+									"value": "order"
+								},
+								{
+									"key": "populate[]",
+									"value": "owner_profile"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/review/fetch/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/profile/review/fetch/5e9793b71e467d54116891fa?populate[]=owner_profile&populate[]=profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"review",
+								"fetch",
+								"5e9793b71e467d54116891fa"
+							],
+							"query": [
+								{
+									"key": "populate[]",
+									"value": "owner_profile"
+								},
+								{
+									"key": "populate[]",
+									"value": "profile"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "conversation (DEPRECATED)",
+			"item": [
+				{
+					"name": "conversation/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"participants\": [\"5c1af33f455f8a1313c9abd1\",\"5e360c3956553e18735eb717\"]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/conversation/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"conversation",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Campaign - Example campaign created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjdkMTMwZmM3NWRjM2Y3ZjY4YTJmMyIsImlhdCI6MTU4MDYwMjc3Nn0.gBXXWaVT7Of9L2h1P-yMYG3wodP9P0YCIO3bPDZIlsY"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"IT\",\n    \"type\":\"multi_item\",\n    \"title\":\"Test Campaign 99\",\n    \"shipping_options\":[{\"label\": \"Postage\", \"price\":\"10\", \"option_type\":\"fixed\"}],\n    \"require_accept\":\"0\",\n    \"accepted_payment_options\":[\"vipps\"],\n    \"use_escrow\":0,\n    \"base_currency\":\"nok\"\n}"
+								},
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/create",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"items\":[]}"
+						}
+					]
+				},
+				{
+					"name": "conversation/addProfile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"profile_id\": \"5c1af33f455f8a1313c9abd1\",\n\t\"conversation_id\": \"5e63f591e0a780231fd07435\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/conversation/addProfile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"conversation",
+								"addProfile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Campaign - Example campaign created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjdkMTMwZmM3NWRjM2Y3ZjY4YTJmMyIsImlhdCI6MTU4MDYwMjc3Nn0.gBXXWaVT7Of9L2h1P-yMYG3wodP9P0YCIO3bPDZIlsY"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"IT\",\n    \"type\":\"multi_item\",\n    \"title\":\"Test Campaign 99\",\n    \"shipping_options\":[{\"label\": \"Postage\", \"price\":\"10\", \"option_type\":\"fixed\"}],\n    \"require_accept\":\"0\",\n    \"accepted_payment_options\":[\"vipps\"],\n    \"use_escrow\":0,\n    \"base_currency\":\"nok\"\n}"
+								},
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/create",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:39:02 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"items\":[]}"
+						}
+					]
+				},
+				{
+					"name": "conversation/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/conversation/fetch/5e695a6edfb9911dc5e645d3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"conversation",
+								"fetch",
+								"5e695a6edfb9911dc5e645d3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch given campaign - Example campaign fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/fetch?id=5c084576060f090df7186dc7",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c084576060f090df7186dc7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"owner\":{\"_id\":\"5c083724060f090df7186dc2\",\"name\":\"bob\",\"email\":\"test999@test.com\",\"type\":\"user\",\"suspended\":false,\"active\":false,\"lastLogin\":1544045231,\"updated_at\":\"2018-12-05 21:27:11\",\"created_at\":\"2018-12-05 20:37:56\"},\"items\":[{\"_id\":\"5c084797060f090df7186dca\",\"price\":\"0.5\",\"use_in_stock\":\"1\",\"in_stock\":\"100\",\"description\":\"Test item 909\",\"campaign_id\":\"5c084576060f090df7186dc7\",\"updated_at\":\"2018-12-05 21:48:07\",\"created_at\":\"2018-12-05 21:48:07\"}]}"
+						}
+					]
+				},
+				{
+					"name": "conversation/fetchByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/conversation/fetchByCurrent/5e360c3956553e18735eb717?offset=0&limit=10&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"conversation",
+								"fetchByCurrent",
+								"5e360c3956553e18735eb717"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch given campaign - Example campaign fetched",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Auth",
+										"value": ""
+									}
+								],
+								"url": {
+									"raw": "http://-HOST_URL-:8000/api/campaign/fetch?id=5c084576060f090df7186dc7",
+									"protocol": "http",
+									"host": [
+										"-HOST_URL-"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"campaign",
+										"fetch"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5c084576060f090df7186dc7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private",
+									"name": "Cache-Control",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"key": "Connection",
+									"value": "close",
+									"name": "Connection",
+									"description": "Options that are desired for the connection"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 +0000",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 05 Dec 2018 21:48:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"key": "Host",
+									"value": "localhost:3000",
+									"name": "Host",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.2.8",
+									"name": "X-Powered-By",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60",
+									"name": "X-RateLimit-Limit",
+									"description": "Custom header"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59",
+									"name": "X-RateLimit-Remaining",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"_id\":\"5c084576060f090df7186dc7\",\"category\":\"IT\",\"type\":\"multi_item\",\"title\":\"Test Campaign 99\",\"shipping_options\":[{\"label\":\"Postage\",\"price\":\"10\",\"option_type\":\"fixed\"}],\"require_accept\":\"0\",\"accepted_payment_options\":[\"vipps\"],\"use_escrow\":0,\"base_currency\":\"nok\",\"owner_id\":\"5c083724060f090df7186dc2\",\"active\":true,\"updated_at\":\"2018-12-05 21:39:02\",\"created_at\":\"2018-12-05 21:39:02\",\"owner\":{\"_id\":\"5c083724060f090df7186dc2\",\"name\":\"bob\",\"email\":\"test999@test.com\",\"type\":\"user\",\"suspended\":false,\"active\":false,\"lastLogin\":1544045231,\"updated_at\":\"2018-12-05 21:27:11\",\"created_at\":\"2018-12-05 20:37:56\"},\"items\":[{\"_id\":\"5c084797060f090df7186dca\",\"price\":\"0.5\",\"use_in_stock\":\"1\",\"in_stock\":\"100\",\"description\":\"Test item 909\",\"campaign_id\":\"5c084576060f090df7186dc7\",\"updated_at\":\"2018-12-05 21:48:07\",\"created_at\":\"2018-12-05 21:48:07\"}]}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "item/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNWU5MmVjM2Y0YjRlMzNkYTcyOWRhMiIsImlzc3VlZF90aW1lc3RhbXAiOjE2MTY4MTA3MzIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTYxNjgxMDczMn0.WAgkAN8lIwc3gVlxDcSAbAij5FXVSMFu5t-zRTJ433A"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "605e93243f4b4e33da729da3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"Potatoes\",\n    \"category\": \"5e90667f3560e2389bae6821\",\n    \"description\": \"Test description\",\n    \"item_type\": \"product\",\n    \"use_in_stock\":true,\n    \"in_stock\":100000,\n    \"price\": 50,\n    \"unit\": \"kg\",\n    \"discount_brackets\": [\n        {\n            \"price\": 40,\n            \"minimum_quantity\": 100\n        },\n         {\n            \"price\": 25,\n            \"minimum_quantity\": 200\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{host}}/item/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "605e93243f4b4e33da729da3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\":\"605e93423f4b4e33da729da4\",\n    \"title\":\"Updated product 22\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/item/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/fetch/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fetch/605e93423f4b4e33da729da4?populate[]=other_pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fetch",
+								"605e93423f4b4e33da729da4"
+							],
+							"query": [
+								{
+									"key": "populate[]",
+									"value": "other_pics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/fetchByCampaign",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fetchByCampaign?id=5e721363ac075f0fcac6e085&limit=10&offset=0&sort=-created_at&item_type=service",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fetchByCampaign"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5e721363ac075f0fcac6e085"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "item_type",
+									"value": "service"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/fetchByIds",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fetchByIds?limit=10&offset=0&sort=created_at&item_ids[]=5e99bcd06daae913188e1d89&item_ids[]=5ea1c2062415562c56fe3914&exclude_out_of_stock=true",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fetchByIds"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "created_at"
+								},
+								{
+									"key": "item_ids[]",
+									"value": "5e99bcd06daae913188e1d89"
+								},
+								{
+									"key": "item_ids[]",
+									"value": "5ea1c2062415562c56fe3914"
+								},
+								{
+									"key": "exclude_out_of_stock",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fetchAny?limit=10&offset=0&sort=-score&populate[]=other_pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-score"
+								},
+								{
+									"key": "populate[]",
+									"value": "other_pics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/fetchByProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fetchByProfile?id={{profile}}&limit=10&offset=0&sort=-created_at&populate[]=other_pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fetchByProfile"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{profile}}"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "other_pics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/delete/605e93423f4b4e33da729da4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"delete",
+								"605e93423f4b4e33da729da4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/item/fromSubscriptions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/fromSubscriptions?offset=0&limit=10&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"fromSubscriptions"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "favorites/profiles/add",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5e360c3956553e18735eb717\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/favorites/profiles/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"profiles",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/items/add",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5e99bcd06daae913188e1d89\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/favorites/items/add",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"items",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/items/remove",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5e99bcd06daae913188e1d89\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/favorites/items/remove",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"items",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/profiles/remove",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5e9b15c2e0a1e31dbfcc3dc8\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/favorites/profiles/remove",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"profiles",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/profiles/fetchMultiple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/favorites/profiles/fetchMultiple?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"profiles",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "favorites/items/fetchMultiple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/favorites/items/fetchMultiple?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"favorites",
+								"items",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "itemOptions",
+			"item": [
+				{
+					"name": "item/options/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Test option 090\",\n    \"accepted_payment_options\" : [\"bankwire\"],\n    \"require_accept\":true,\n    \"use_escrow\":false,\n    \"base_currency\":\"nok\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/item/options/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"options",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/options/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\": \"5e63eb2486e3fc19eaf7dc54\",\n    \"title\": \"Test option 2 - upperio\",\n    \"accepted_payment_options\" : [\"visa\"],\n    \"shipping_options\":[{\"label\": \"Postage\",\"price\":\"10\",  \"option_type\":\"fixed\"}, {\"label\":\"Home delivery\", \"price\":\"11.44\", \"option_type\":\"fixed\"}],\n    \"require_accept\":true,\n    \"use_escrow\":true,\n    \"base_currency\":\"nok\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/item/options/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"options",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/options/fetchByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/options/fetchByCurrent?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"options",
+								"fetchByCurrent"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5e5e7c4223e31d0e1eb51d4f",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/options/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/options/fetch/5e62882d9ffaf4132129d0e5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"options",
+								"fetch",
+								"5e62882d9ffaf4132129d0e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/options/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/options/delete/5e62882d9ffaf4132129d0e5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"options",
+								"delete",
+								"5e62882d9ffaf4132129d0e5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "itemReview",
+			"item": [
+				{
+					"name": "item/review/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"item\": \"5eac649eb8db76b6ce7c033b\",\n\t\"text\": \"Hello world--YY00i\",\n\t\"rating\": 5\n}"
+						},
+						"url": {
+							"raw": "{{host}}/item/review/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"review",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/review/fetchByProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/review/fetchByProfile?owner_id=5e360c3956553e18735eb717&limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"review",
+								"fetchByProfile"
+							],
+							"query": [
+								{
+									"key": "owner_id",
+									"value": "5e360c3956553e18735eb717"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/review/fetchByItem",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/review/fetchByItem?id=5e63ee21cf628b1beeb9c607&limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"review",
+								"fetchByItem"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5e63ee21cf628b1beeb9c607"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/review/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/review/delete/5e6a5daadf684a23057be178",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"review",
+								"delete",
+								"5e6a5daadf684a23057be178"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "item/review/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/item/review/fetch/5e6a5da2df684a23057be177",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"item",
+								"review",
+								"fetch",
+								"5e6a5da2df684a23057be177"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "message",
+			"item": [
+				{
+					"name": "message/send",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"receiver\": \"5ef7176e06f0e1a10b854830\",\n   \"text\":\"Hello, ohoi! 2\",\n   \"belongs_to\": \"5f0f42356fbc4e4dd5bc755b\",\n   \"belongs_to_kind\": \"Order\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/message/send",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"message",
+								"send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "message/fetchByConversation",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/message/fetchByConversation?id=5e63f591e0a780231fd07435&sort=-created_at&limit=100&offset=0&populate[]=sender",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"message",
+								"fetchByConversation"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5e63f591e0a780231fd07435"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "populate[]",
+									"value": "sender"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "order/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"payment_option_selected\": \"BANK_WIRE\",\n   \"items\": [{\"item\":\"606205872bb6291500086be3\", \"quantity\":2}],\n   \"comment\": \"This is a dummy comment\",\n   \"delivery_event\": \"60807a43b8365f503b8aa5e1\",\n   \"use_home_delivery\": true\n}"
+						},
+						"url": {
+							"raw": "{{host}}/order/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/order/fetch/605ea1fc9d591a42b1a5643b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"fetch",
+								"605ea1fc9d591a42b1a5643b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/order/cancel/5eaeaece16fb4017a1d200e3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"cancel",
+								"5eaeaece16fb4017a1d200e3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/fetchByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/order/fetchByCurrent?limit=100&offset=0&sort=-created_at&status[]=PENDING&status[]=ACCEPTED",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"fetchByCurrent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "status[]",
+									"value": "PENDING"
+								},
+								{
+									"key": "status[]",
+									"value": "ACCEPTED"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/order/fetchAny?limit=100&offset=0&sort=-created_at&status[]=PENDING",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "status[]",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/accept",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}"
+						},
+						"url": {
+							"raw": "{{host}}/order/accept/60318df35f67f041a92821a2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"accept",
+								"60318df35f67f041a92821a2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/buyer/delivery_confirmed/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/buyer/delivery_confirmed/5ea5682fa58a188981cb61b4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"buyer",
+								"delivery_confirmed",
+								"5ea5682fa58a188981cb61b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/buyer/payment_confirmed/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/buyer/payment_confirmed/5ea5682fa58a188981cb61b4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"buyer",
+								"payment_confirmed",
+								"5ea5682fa58a188981cb61b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/seller/delivery_confirmed/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/seller/delivery_confirmed/5ea5682fa58a188981cb61b4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"seller",
+								"delivery_confirmed",
+								"5ea5682fa58a188981cb61b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/seller/payment_confirmed/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/seller/payment_confirmed/5ea5682fa58a188981cb61b4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"seller",
+								"payment_confirmed",
+								"5ea5682fa58a188981cb61b4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/update_delivery_date:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"estimated_delivery_date\": \"2022-03-01T23:39:37.668Z\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/order/update_delivery_date/5e64e28f85dce011359c35b1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"update_delivery_date",
+								"5e64e28f85dce011359c35b1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/reject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/reject/5ea83296338ec118065511f2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"reject",
+								"5ea83296338ec118065511f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order/cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/cancel/5ea83296338ec118065511f2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"cancel",
+								"5ea83296338ec118065511f2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/braintree/token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/order/braintree/token",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"braintree",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/order/pay/braintree/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nonce\": {\n\n    }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/order/pay/braintree/60a6f077dcdb224098f3e6bc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"order",
+								"pay",
+								"braintree",
+								"60a6f077dcdb224098f3e6bc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "profile/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "-PROFILE_ID-",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\":\"Test company  ZZ\",\n   \"description\":\"Comapny description\",\n   \"website_url\":\"http://example.com\",\n   \"categories\":[\n      \"5e90667f3560e2389bae6821\"\n   ],\n   \"type\":\"consumer\",\n   \"tags\":[\n      \"tag1\",\n      \"tag2\"\n   ],\n   \"location\":{\n      \"type\":\"Point\",\n      \"coordinates\":[\n         \"-10\",\n         \"10\"\n      ]\n   },\n   \"location_string\":\"Kking harald street, 5012 Oslo\",\n   \"opening_times\":{\n      \"1\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      },\n      \"2\":{\n         \"open\":{\n            \"hour\":8,\n            \"minute\":0\n         },\n         \"close\":{\n            \"hour\":22,\n            \"minute\":0\n         }\n      }\n   }\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"_id\": \"605a5657e5633448a0b7621f\",\n  \"title\": \"Hello!!\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/addUser",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"5e27d130fc75dc3f7f68a2f3\",\n    \"profile_id\": \"5e67cf3cf5b54f14fdc84940\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/profile/addUser",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"addUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/fetch",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/profile/fetch/{{profile}}?include_favorite_items=true&include_favorite_profiles=true&populate[]=categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"fetch",
+								"{{profile}}"
+							],
+							"query": [
+								{
+									"key": "include_favorite_items",
+									"value": "true"
+								},
+								{
+									"key": "include_favorite_profiles",
+									"value": "true"
+								},
+								{
+									"key": "populate[]",
+									"value": "categories"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/profile/delete/5ea9d2408eb11aa530a19198",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"delete",
+								"5ea9d2408eb11aa530a19198"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/fetchByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/profile/fetchByCurrent?limit=10&offset=0&sort=-created_at&hasCategory=5e90667f3560e2389bae6821&populate[]=categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"profile",
+								"fetchByCurrent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "hasCategory",
+									"value": "5e90667f3560e2389bae6821"
+								},
+								{
+									"key": "populate[]",
+									"value": "categories"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile/fetchAny",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/profile/fetchAny?limit=2&offset=0&sort=-created_at",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"profile",
+								"fetchAny"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profileSubscription",
+			"item": [
+				{
+					"name": "/profile/subscribe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"id\": \"5e360c3956553e18735eb717\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/subscriptions/subscribe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/profile/unsubscribe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"id\": \"5e360c3956553e18735eb717\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/subscriptions/unsubscribe",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"unsubscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/fetchBySubscribingTo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/subscriptions/fetchBySubscribingTo/5e360c3956553e18735eb717?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"fetchBySubscribingTo",
+								"5e360c3956553e18735eb717"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/fetch/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/subscriptions/fetch/5e99789dde20350efcf3dd4f",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"fetch",
+								"5e99789dde20350efcf3dd4f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/fetchBySubscriber",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/subscriptions/fetchBySubscriber/{{profile}}?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"fetchBySubscriber",
+								"{{profile}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/profile/fetchBySubscriber",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/subscriptions/profile/fetchBySubscriber/{{profile}}?limit=10&offset=0&sort=-created_at&populate[]=other_pics",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"profile",
+								"fetchBySubscriber",
+								"{{profile}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "other_pics"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/subscriptions/profile/fetchBySubscribingTo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/subscriptions/profile/fetchBySubscribingTo/5e360c3956553e18735eb717?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"subscriptions",
+								"profile",
+								"fetchBySubscribingTo",
+								"5e360c3956553e18735eb717"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "/transaction/fetchMultiple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/transaction/fetchMultiple?sort=-created_at&offset=0&limit=10",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"transaction",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "event/fetchByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/event/fetchByCurrent?limit=10&offset=0&sort=-created_at&last_signature_only=false&newer_than=2020-04-05T17:23:43.778Z",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"fetchByCurrent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "last_signature_only",
+									"value": "false"
+								},
+								{
+									"key": "newer_than",
+									"value": "2020-04-05T17:23:43.778Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event/fetch/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/event/fetch/5f380dbc13a9bb65a64010cc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"fetch",
+								"5f380dbc13a9bb65a64010cc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event/fetchWithParticipants",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/event/fetchWithParticipants?participants[]={{profile}}&limit=10&offset=0&sort=-created_at&populate[]=data_object",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"fetchWithParticipants"
+							],
+							"query": [
+								{
+									"key": "participants[]",
+									"value": "{{profile}}"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								},
+								{
+									"key": "populate[]",
+									"value": "data_object"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "event/fetchEventParticipantsByCurrent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/event/fetchEventParticipantsByCurrent?limit=2&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"fetchEventParticipantsByCurrent"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "category/fetchMultiple",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"type": "text",
+								"value": "{{profile}}",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/category/fetchMultiple?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\": \"Test category\",\n   \"weight\": 0\n}"
+						},
+						"url": {
+							"raw": "{{host}}/category/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"605e9dd98af80c3e8be1fe7e\",\n   \"title\": \"new title\",\n   \"weight\": 0\n}"
+						},
+						"url": {
+							"raw": "{{host}}/category/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category/delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\": \"Test category\",\n   \"weight\": 0\n}"
+						},
+						"url": {
+							"raw": "{{host}}/category/delete/605e9dd98af80c3e8be1fe7e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"category",
+								"delete",
+								"605e9dd98af80c3e8be1fe7e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "file",
+			"item": [
+				{
+					"name": "file/upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}",
+								"type": "text"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Pictures/(JPEG Image, 192 × 263 pixels).jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/file/upload",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"file",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "paymentHandlers (DEPRECATED)",
+			"item": [
+				{
+					"name": "/mangopay/hook/callback/:access_key",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/mangopay/hook/callback/abc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"mangopay",
+								"hook",
+								"callback",
+								"abc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pickupLocation",
+			"item": [
+				{
+					"name": "pickupLocation/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"label\": \"Pickup location 1\",\n    \"locationString\": \"First street, Oslo\",\n    \"home_delivery_price\": 100\n}"
+						},
+						"url": {
+							"raw": "{{host}}/pickupLocation/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pickupLocation",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickupLocation/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"604c0a811ce6b7dfe4ba0a3f\",\n    \"label\": \"Changed Label 2\",\n    \"locationString\": \"First street, Oslo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/pickupLocation/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pickupLocation",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickupLocation/delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/pickupLocation/delete/604c0bd04ea12ee33312aa62",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pickupLocation",
+								"delete",
+								"604c0bd04ea12ee33312aa62"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickupLocation/fetchById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"6043b7778f5f9e9b0bfa90f2\",\n    \"label\": \"Changed Label 2\",\n    \"locationString\": \"First street, Oslo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/pickupLocation/fetch/6043ba15dd4db7a0ad2cc462",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pickupLocation",
+								"fetch",
+								"6043ba15dd4db7a0ad2cc462"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickupLocation/fetchMultiple",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"6043b7778f5f9e9b0bfa90f2\",\n    \"label\": \"Changed Label 2\",\n    \"locationString\": \"First street, Oslo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/pickupLocation/fetchMultiple?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pickupLocation",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "deliveryEvent",
+			"item": [
+				{
+					"name": "deliveryEvent/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"label\": \"Delivery event 1\",\n    \"date\": \"2021-03-06T17:10:15.148Z\",\n    \"pickup_location\": \"605ba014e618e97166355026\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/deliveryEvent/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"deliveryEvent",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deliveryEvent/update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"604c0ab01ce6b7dfe4ba0a40\",\n    \"label\": \"Label changed\",\n    \"date\": \"2021-03-06T17:10:15.148Z\",\n    \"pickup_location\": \"6043b956dd4db7a0ad2cc460\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/deliveryEvent/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"deliveryEvent",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickupLocation/delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/deliveryEvent/delete/604c0ab01ce6b7dfe4ba0a40",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"deliveryEvent",
+								"delete",
+								"604c0ab01ce6b7dfe4ba0a40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deliveryEvent/fetchById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"6043b7778f5f9e9b0bfa90f2\",\n    \"label\": \"Changed Label 2\",\n    \"locationString\": \"First street, Oslo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/deliveryEvent/fetch/6043b960dd4db7a0ad2cc461",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"deliveryEvent",
+								"fetch",
+								"6043b960dd4db7a0ad2cc461"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deliveryEvent/fetchMultiple",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"6043b7778f5f9e9b0bfa90f2\",\n    \"label\": \"Changed Label 2\",\n    \"locationString\": \"First street, Oslo\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/deliveryEvent/fetchMultiple?limit=10&offset=0&sort=-date",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"deliveryEvent",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-date"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "problemReport",
+			"item": [
+				{
+					"name": "problemReport/create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"type\": \"DELIVERY_PROBLEM\",\n   \"title\": \"Test problem\",\n   \"description\": \"This is a description\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/problemReport/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"problemReport",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "problemReport/delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/problemReport/delete/604c0c2e4ea12ee33312aa64",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"problemReport",
+								"delete",
+								"604c0c2e4ea12ee33312aa64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deliveryEvent/fetchById",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/problemReport/fetch/604c0cda060e7fe53d4d2144",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"problemReport",
+								"fetch",
+								"604c0cda060e7fe53d4d2144"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deliveryEvent/fetchMultiple",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer}}"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "profile",
+								"value": "{{profile}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/problemReport/fetchMultiple?limit=10&offset=0&sort=-created_at",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"problemReport",
+								"fetchMultiple"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "-created_at"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "root",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}",
+					"host": [
+						"{{host}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/logs",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"logs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
